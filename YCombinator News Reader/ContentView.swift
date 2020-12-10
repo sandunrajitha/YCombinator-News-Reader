@@ -16,7 +16,6 @@ struct ContentView: View {
             }
             .navigationBarTitle(
                 Text("YCombinator News")
-                    .font(.system(size: 200, weight: .black))
             )
         }
     }
