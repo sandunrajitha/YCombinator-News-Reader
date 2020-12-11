@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
-import WebKit
 
 struct DetailView: View {
     var url: String?
     
     var body: some View {
-        WebView(url: url)
+        WebView(urlString: url)
     }
 }
 

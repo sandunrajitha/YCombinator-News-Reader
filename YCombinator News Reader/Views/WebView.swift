@@ -8,21 +8,10 @@
 import SwiftUI
 import WebKit
 
-
-struct WebView: View {
-    
-    let url: String?
-    var body: some View {
-        WebKitWebView(urlString: url)
-    }
-}
-
-
-
-struct WebKitWebView: UIViewRepresentable {
+struct WebView: UIViewRepresentable {
     let urlString: String?
     
-    func makeUIView(context: Context) -> WebKitWebView.UIViewType {
+    func makeUIView(context: Context) ->WKWebView {
         return WKWebView()
     }
     
@@ -34,12 +23,5 @@ struct WebKitWebView: UIViewRepresentable {
             }
             
         }
-    }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        WebView(url: "https://www.apple.com")
-            .previewLayout(.sizeThatFits)
     }
 }
