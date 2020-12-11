@@ -8,10 +8,16 @@
 import Foundation
 
 struct NewsList: Codable {
-    var hits: [Hit]
+    var hits: [NewsItem]
 }
 
-struct Hit: Codable {
-    var title: String
-    var points: Int
+struct NewsItem: Codable, Identifiable {
+    var id: String {
+        return objectID
+    }
+    
+    let objectID: String
+    let url: String
+    let title: String
+    let points: Int
 }

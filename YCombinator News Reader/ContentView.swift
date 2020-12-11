@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var networkManager = NetworkManager()
+    
     var body: some View {
         NavigationView {
             
-            List(posts) { post in
+            List(networkManager.posts) { post in
                 Text(post.title)
             }
             .navigationBarTitle(
                 Text("YCombinator News")
             )
         }
+        
+        .onAppear(perform: {
+            networkManager.fetchData()
+        })
     }
+
 }
 
 struct Post: Identifiable {

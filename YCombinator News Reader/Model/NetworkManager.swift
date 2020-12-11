@@ -7,33 +7,37 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager: ObservableObject {
+    
+    @Published var posts = [NewsItem]()
+    
     func fetchData() {
         
         if let url = URL(string: "https://hn.algolia.com/api/v1/search?tags=front_page"){
-        
-        let session = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let e = error{
-                print("error\(e)")
-            } else {
-//                print(response)
-                
-                if let safeData = data{
-                    let decoder = JSONDecoder()
-                    do{
-                        let decodedData = try decoder.decode(NewsList.self, from: safeData)
-                        print(decodedData.hits[0].title)
-                        print(decodedData.hits[0].points)
-                    }catch{
-                        print(error)
-                    }
+            
+            let session = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let e = error{
+                    print("error\(e)")
                 } else {
-                    print("data was null")
+                    //                print(response)
+                    
+                    if let safeData = data{
+                        let decoder = JSONDecoder()
+                        do{
+                            let decodedData = try decoder.decode(NewsList.self, from: safeData)
+                            DispatchQueue.main.async {
+                                self.posts = decodedData.hits
+                            }
+                        }catch{
+                            print(error)
+                        }
+                    } else {
+                        print("data is null")
+                    }
                 }
             }
-        }
-        
-        session.resume()
+            
+            session.resume()
         }
     }
 }
