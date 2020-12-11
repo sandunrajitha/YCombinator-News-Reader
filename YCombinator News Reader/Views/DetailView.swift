@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct DetailView: View {
-    var url: String?
+    var post: NewsItem
     
     var body: some View {
-        WebView(urlString: url)
+        if let url = post.url{
+            WebView(urlString: url)
+        } else {
+            WebView(urlString: "https://news.ycombinator.com/item?id=\(post.id)")
+        }
+//        WebView(urlString: url)
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(url: "https://www.google.com")
-    }
-}
+//struct DetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailView(url: "https://www.google.com")
+//    }
+//}

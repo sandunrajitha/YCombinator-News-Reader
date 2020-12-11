@@ -15,7 +15,7 @@ struct ContentView: View {
             
             List(networkManager.posts) { post in
                 NavigationLink(
-                    destination: DetailView(url: post.url),
+                    destination: DetailView(post: post),
                     label: {
                         HStack {
                             Text(String(post.points))
