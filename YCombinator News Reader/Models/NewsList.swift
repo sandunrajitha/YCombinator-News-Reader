@@ -17,7 +17,7 @@ struct NewsItem: Codable, Identifiable {
     }
     
     let objectID: String
-    let url: String
+    let url: String?
     let title: String
     let points: Int
 }

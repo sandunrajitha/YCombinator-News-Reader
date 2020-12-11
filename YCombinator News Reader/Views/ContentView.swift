@@ -14,7 +14,15 @@ struct ContentView: View {
         NavigationView {
             
             List(networkManager.posts) { post in
-                Text(post.title)
+                NavigationLink(
+                    destination: DetailView(url: post.url),
+                    label: {
+                        HStack {
+                            Text(String(post.points))
+                            Text(post.title)
+                        }
+                    })
+                
             }
             .navigationBarTitle(
                 Text("YCombinator News")
@@ -27,19 +35,6 @@ struct ContentView: View {
     }
 
 }
-
-struct Post: Identifiable {
-    var id: String
-    let title: String
-}
-
-let posts = [
-    Post(id: "1", title: "bla bla 1"),
-    Post(id: "2", title: "bla bla 2"),
-    Post(id: "3", title: "bla bla 3"),
-    Post(id: "4", title: "bla bla 4"),
-    Post(id: "5", title: "bla bla 5")
-]
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
