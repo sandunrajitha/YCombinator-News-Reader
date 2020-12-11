@@ -20,8 +20,14 @@ class NetworkManager {
 //                print(response)
                 
                 if let safeData = data{
-                    print(safeData)
-                    
+                    let decoder = JSONDecoder()
+                    do{
+                        let decodedData = try decoder.decode(NewsList.self, from: safeData)
+                        print(decodedData.hits[0].title)
+                        print(decodedData.hits[0].points)
+                    }catch{
+                        print(error)
+                    }
                 } else {
                     print("data was null")
                 }
